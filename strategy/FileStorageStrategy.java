@@ -8,7 +8,7 @@ public class FileStorageStrategy implements StorageStrategy {
     FileBucket[] table = new FileBucket[DEFAULT_INITIAL_CAPACITY];
     int size;
     private long bucketSizeLimit = DEFAULT_BUCKET_SIZE_LIMIT;
-    long maxBucketSize; // размер самого большого имеющегося бакета
+    long maxBucketSize; // размер самого большого имеющегося бакет-блока
 
     public long getBucketSizeLimit() {
         return bucketSizeLimit;
