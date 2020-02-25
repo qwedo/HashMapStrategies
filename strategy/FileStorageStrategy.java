@@ -8,7 +8,7 @@ public class FileStorageStrategy implements StorageStrategy {
     FileBucket[] table = new FileBucket[DEFAULT_INITIAL_CAPACITY];
     int size;
     private long bucketSizeLimit = DEFAULT_BUCKET_SIZE_LIMIT;
-    long maxBucketSize; // размер самого большого имеющегося бакет-блока
+    long maxBucketSize; // размер самого большого имеющегося бакета
 
     public long getBucketSizeLimit() {
         return bucketSizeLimit;
@@ -42,7 +42,6 @@ public class FileStorageStrategy implements StorageStrategy {
         FileBucket[] newTable = new FileBucket[newCapacity];
         transfer(newTable);
         table = newTable;
-        //threshold = (int) (newCapacity * DEFAULT_LOAD_FACTOR);
     }
 
     void transfer(FileBucket[] newTable){
@@ -54,14 +53,14 @@ public class FileStorageStrategy implements StorageStrategy {
                 while (e != null) {
                     int j = indexFor(hash(e.key), newCapacity);
                     newTable[j].putEntry(e);
-                    e = e.next; // ??? считывается ли следующий элемент из файла, или читается тот же первый?
+                    e = e.next;
                 }
             }
         }
 
         for (int i = 0; i < src.length; i++){
             if (src[i] != null)
-                src[i].remove(); //удаляю старые файлы, которые ранее исопльзовались
+                src[i].remove(); //удаление старых файлы, которые ранее использовались
         }
 
 
@@ -95,7 +94,7 @@ public class FileStorageStrategy implements StorageStrategy {
         if (value == null) return false;
         for (int i = 0; i < table.length; i++) {
             if (table[i] != null) {
-                for (Entry e = table[i].getEntry(); e != null; e = e.next) { // ?? тот же вопрос, что и в трансфер
+                for (Entry e = table[i].getEntry(); e != null; e = e.next) {
                     if (value.equals(e.value))
                         return true;
                 }
@@ -116,7 +115,7 @@ public class FileStorageStrategy implements StorageStrategy {
         if (value == null) return null;
         for (int i = 0; i < table.length; i++) {
             if (table[i] != null) {
-                for (Entry e = table[i].getEntry(); e != null; e = e.next) { // ?? тот же вопрос, что и в трансфер
+                for (Entry e = table[i].getEntry(); e != null; e = e.next) {
                     if (value.equals(e.value))
                         return e.key;
                 }

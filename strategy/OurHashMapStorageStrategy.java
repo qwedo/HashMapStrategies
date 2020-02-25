@@ -10,7 +10,6 @@ public class OurHashMapStorageStrategy implements StorageStrategy {
     Entry[] table = new Entry[DEFAULT_INITIAL_CAPACITY];
     int size;
     int threshold = (int) (DEFAULT_INITIAL_CAPACITY * DEFAULT_LOAD_FACTOR);
-    //float loadFactor = DEFAULT_LOAD_FACTOR;
 
     int hash(Long k){
         int h;
@@ -70,7 +69,6 @@ public class OurHashMapStorageStrategy implements StorageStrategy {
     @Override
     public boolean containsKey(Long key) {
         return getEntry(key) != null;
-        //return false; почему-то до этого первая строчка была закоменнтирована
     }
 
     @Override
